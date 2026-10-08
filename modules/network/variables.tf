@@ -20,7 +20,7 @@ variable "nat_gateway_count" {
   default     = 2
 
   validation {
-    condition     = var.nat_gateway_count >= 1 && var.nat_gateway_count <= 2
+    condition     = contains([1, 2], var.nat_gateway_count)
     error_message = "nat_gateway_count debe ser 1 o 2."
   }
 }
