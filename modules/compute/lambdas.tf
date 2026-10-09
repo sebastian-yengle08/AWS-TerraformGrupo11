@@ -10,13 +10,13 @@ resource "aws_cloudwatch_log_group" "crop" {
 
 data "archive_file" "upload" {
   type        = "zip"
-  source_dir  = "${path.root}/../../src/upload-lambda"
+  source_dir  = "${path.module}/../../src/upload-lambda"
   output_path = "${path.root}/upload-lambda.zip"
 }
 
 data "archive_file" "crop" {
   type        = "zip"
-  source_dir  = "${path.root}/../../src/crop-lambda"
+  source_dir  = "${path.module}/../../src/crop-lambda"
   output_path = "${path.root}/crop-lambda.zip"
 }
 
@@ -33,9 +33,9 @@ resource "aws_lambda_function" "upload" {
 
   environment {
     variables = {
-      S3_BUCKET      = var.bucket_name
-      UPLOAD_PREFIX  = "uploads/"
-      MAX_UPLOAD_MB  = tostring(var.max_upload_mb)
+      S3_BUCKET     = var.bucket_name
+      UPLOAD_PREFIX = "uploads/"
+      MAX_UPLOAD_MB = tostring(var.max_upload_mb)
     }
   }
 

@@ -56,7 +56,8 @@ exports.handler = async (event) => {
           .toBuffer();
 
         const fileNameWithExt = key.replace(/^uploads\//, "");
-        const fileNameWithoutExt = fileNameWithExt.substring(0, fileNameWithExt.lastIndexOf("."));
+        const dotIndex = fileNameWithExt.lastIndexOf(".");
+        const fileNameWithoutExt = dotIndex > 0 ? fileNameWithExt.substring(0, dotIndex) : fileNameWithExt;
         const processedPrefix = process.env.PROCESSED_PREFIX || "processed/";
         const targetKey = `${processedPrefix}${fileNameWithoutExt}_circular.png`;
 
