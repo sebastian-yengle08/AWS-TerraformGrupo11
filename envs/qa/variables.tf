@@ -13,6 +13,11 @@ variable "aws_profile" {
 variable "environment" {
   description = "Entorno: dev, qa o prod"
   type        = string
+
+  validation {
+    condition     = contains(["dev", "qa", "prod"], var.environment)
+    error_message = "El valor de environment debe ser dev, qa o prod."
+  }
 }
 
 variable "vpc_cidr" {
